@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		1674014475326C50909D57C5 /* Pods_Goals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E97DF1AAED922F245E1F24 /* Pods_Goals.framework */; };
 		B2E88892206BE96900594D8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E88891206BE96900594D8E /* AppDelegate.swift */; };
-		B2E88894206BE96900594D8E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E88893206BE96900594D8E /* ViewController.swift */; };
+		B2E88894206BE96900594D8E /* GoalsVS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E88893206BE96900594D8E /* GoalsVS.swift */; };
 		B2E88897206BE96900594D8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2E88895206BE96900594D8E /* Main.storyboard */; };
 		B2E88899206BE96900594D8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2E88898206BE96900594D8E /* Assets.xcassets */; };
 		B2E8889C206BE96900594D8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2E8889A206BE96900594D8E /* LaunchScreen.storyboard */; };
+		B2E888A5206BF74C00594D8E /* UpdateGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E888A4206BF74C00594D8E /* UpdateGoalVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,11 +21,12 @@
 		46E97DF1AAED922F245E1F24 /* Pods_Goals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Goals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2E8888E206BE96900594D8E /* Goals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Goals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2E88891206BE96900594D8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B2E88893206BE96900594D8E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B2E88893206BE96900594D8E /* GoalsVS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsVS.swift; sourceTree = "<group>"; };
 		B2E88896206BE96900594D8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B2E88898206BE96900594D8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B2E8889B206BE96900594D8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B2E8889D206BE96900594D8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2E888A4206BF74C00594D8E /* UpdateGoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGoalVC.swift; sourceTree = "<group>"; };
 		F1E9A716A289B040916070AA /* Pods-Goals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Goals.release.xcconfig"; path = "Pods/Target Support Files/Pods-Goals/Pods-Goals.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,11 +81,12 @@
 			isa = PBXGroup;
 			children = (
 				B2E88891206BE96900594D8E /* AppDelegate.swift */,
-				B2E88893206BE96900594D8E /* ViewController.swift */,
 				B2E88895206BE96900594D8E /* Main.storyboard */,
 				B2E88898206BE96900594D8E /* Assets.xcassets */,
 				B2E8889A206BE96900594D8E /* LaunchScreen.storyboard */,
 				B2E8889D206BE96900594D8E /* Info.plist */,
+				B2E88893206BE96900594D8E /* GoalsVS.swift */,
+				B2E888A4206BF74C00594D8E /* UpdateGoalVC.swift */,
 			);
 			path = Goals;
 			sourceTree = "<group>";
@@ -232,7 +235,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2E88894206BE96900594D8E /* ViewController.swift in Sources */,
+				B2E888A5206BF74C00594D8E /* UpdateGoalVC.swift in Sources */,
+				B2E88894206BE96900594D8E /* GoalsVS.swift in Sources */,
 				B2E88892206BE96900594D8E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
