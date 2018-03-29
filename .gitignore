@@ -1,4 +1,5 @@
 Goals-UI.sketch
 Pods/
 .DS_Store
-Goals.xcworkspace/xcuserdata/
+Goals.xcworkspace/xcuserdata
+GoogleService-Info.plist 

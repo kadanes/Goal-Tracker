@@ -8,4 +8,7 @@ target 'Goals' do
   # Pods for Goals
 
   pod 'Eureka', '~> 4.1.1'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
 end
+

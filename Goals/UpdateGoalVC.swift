@@ -8,6 +8,7 @@
 
 import UIKit
 import Eureka
+import FirebaseDatabase
 
 class UpdateGoalVC: FormViewController {
 
@@ -17,89 +18,82 @@ class UpdateGoalVC: FormViewController {
     var ID = ""
     
     var statusSection =  SelectableSection<ListCheckRow<String>>()
+    var titleRow = TextRow()
+    var descriptionRow = TextRow()
+    var startDateRow = DateInlineRow()
+    var endDateRow = DateInlineRow()
+
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        titleRow = TextRow() { row in
+            row.title = "Title"
+            row.placeholder = "Enter goal name"
+            row.tag = "title"
+            row.value = goal["title"]
+        }
 
+        descriptionRow = TextRow() { row in
+           
+            row.title = "Description"
+            row.placeholder = "Enter description name"
+            row.tag = "description"
+            row.value = goal["desc"]
+            
+        }
+        
+        startDateRow = DateInlineRow("Starts") {
+            $0.title = $0.tag
+            $0.tag = "Stars"
+            
+            if let  start = goal["starts"]  {
+                
+                let timestamp = Double(start)!
+                
+                $0.value = Date(timeIntervalSince1970: timestamp)
+                
+            } else {
+               $0.value = Date()
+            }
+            
+            
+        }
+        
+        
+        
+        endDateRow = DateInlineRow("Ends"){
+            $0.title = $0.tag
+            $0.tag = "Ends"
+            if let  ends = goal["ends"]  {
+                
+                let timestamp = Double(ends)!
+                
+                $0.value = Date(timeIntervalSince1970: timestamp)
+                
+            } else {
+                $0.value = Date()
+            }
+            
+        }
+        
+        
+        statusSection = SelectableSection<ListCheckRow<String>>("What's the goal status?", selectionType: .singleSelection(enableDeselection: false))
+        
         form +++ Section("Details")
         
-            <<< TextRow() { row in
-                    row.title = "Title"
-                    row.placeholder = "Enter goal name"
-                    row.tag = "title"
-                    row.value = goal["title"]
-                }.onChange({ (row) in
-                    
-                    print("Title: ",row.value)
-                    
-                    self.goal["title"] =  row.value!
-                })
             
-        
-            <<< TextRow() { row in
-                    row.title = "Description"
-                    row.placeholder = "Enter description name"
-                    row.tag = "description"
-                    row.value = goal["description"]
-                
-                }.onChange({ (row) in
-                    
-                    print("Description: ",row.value)
-                    self.goal["description"] =  row.value!
-                })
-        
-            <<< DateInlineRow("Starts") {
-                $0.title = $0.tag
-                $0.tag = "Stars"
-                let timestamp = Double(goal["starts"]!) ?? 0
-                
-                $0.value = Date(timeIntervalSince1970: timestamp)
-                }
-                .onChange { [weak self] row in
-
-                        let timestamp = String((Double((row.value?.timeIntervalSince1970)!) * 1000.0 ).rounded())
-                    
-                        self?.goal["starts"] = timestamp
-                    
-//                    if (timestamp < self?.goal["ends"] ?? "0") {
-//
-//                            self?.goal["start"] = timestamp
-//                            row.cell!.backgroundColor = .white
-//
-//                    } else {
-//                        row.cell.backgroundColor = .red
-//                    }
-                    
-                }
             
-            <<< DateInlineRow("Ends"){
-                $0.title = $0.tag
-                $0.tag = "Ends"
-                let timestamp = Double(goal["ends"]! ) ?? 0
-                
-                $0.value = Date(timeIntervalSince1970: timestamp)
-                
-                }
-                .onChange { [weak self] row in
-    
-                    var timestamp = String((Double((row.value?.timeIntervalSince1970)!) * 1000.0 ).rounded())
-                    
-                    self?.goal["ends"] = timestamp
-                    
-//                    if (timestamp > self?.goal["starts"] ?? "0") {
-//
-//                        self?.goal["start"] = timestamp
-//                        row.cell!.backgroundColor = .white
-//                    } else {
-//                        row.cell.backgroundColor = .red
-//                    }
-                }
-            
-
-            statusSection = SelectableSection<ListCheckRow<String>>("What's the goal status?", selectionType: .singleSelection(enableDeselection: false))
+            <<< titleRow
         
-            form +++ statusSection
+            <<< descriptionRow
+        
+            <<< startDateRow
+            
+            <<< endDateRow
+        
+            +++ statusSection
         
         let status = ["Started","In Progress", "Done", "Not Done"]
         
@@ -127,9 +121,43 @@ class UpdateGoalVC: FormViewController {
     }
     
     func submitGoal() {
-        
+       
+        goal["title"] = titleRow.value
+        goal["desc"] = descriptionRow.value
         goal["status"] = statusSection.selectedRow()?.value
-        print(goal)
+        goal["starts"] = getTimestamp(startDateRow.value ?? Date())
+        goal["ends"] = getTimestamp(endDateRow.value ?? Date())
+    
+        if goal["title"] == "" || goal["desc"] == "" {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+ 
         
+        if goal["ID"] == nil {
+            
+            print("New goal being added")
+            
+            let key = GOALS_ROOT.childByAutoId().key
+            goal["ID"] = key
+            GOALS_ROOT.child(key).setValue(goal)
+
+        } else {
+            let key = goal["ID"] ?? "0"
+            GOALS_ROOT.child(key).setValue(goal)
+            
+        }
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
+    func getTimestamp(_ date: Date)  -> String {
+        
+       
+        
+        let timestamp = String((Double((date.timeIntervalSince1970))).rounded())
+        
+        return timestamp
     }
 }
